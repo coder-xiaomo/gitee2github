@@ -1,1 +1,17 @@
-*.json
+# Python 运行时文件
+__pycache__
+*.pyc
+
+# 临时文件
+temp
+
+# 需要用户自行配置的文件
+config.ini
+mapping.json
+
+# 用户运行时产生文件
+GlobalVars.json
+commands.bat
+commands.txt
+# 克隆的Git仓库
+*.git

@@ -1,0 +1,15 @@
+{
+    "_": "请注意，在此处设置映射后将使用映射后的值进行比较，映射前的值将不再参与比较",
+    "orgNameMap": {
+        "from1": "to1",
+        "from2": "to2"
+    },
+    "repoNameMap": {
+        "from1": "to1",
+        "from2": "to2"
+    },
+    "fullNameMap": {
+        "from1": "to1",
+        "from2": "to2"
+    }
+}
