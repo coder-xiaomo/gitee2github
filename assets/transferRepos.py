@@ -71,7 +71,7 @@ def transferRepos(matchList, WorkingDir, fromRepoProtocol = 'https', toRepoProto
     print("命令文件生成完毕，请查看：", batFilePath)
 
     if input("是否直接执行(不推荐)？输入y执行，其他输入不执行并继续: ") == "y":
-        os.system(batFilePath)
+        os.system('"{}"'.format(batFilePath))
         # 下面这样执行不行，无法保证当前目录
         # for commandForExecute in commands:
         #     print("[正在执行]", commandForExecute)
