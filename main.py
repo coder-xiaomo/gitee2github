@@ -132,6 +132,7 @@ if __name__ == '__main__':
     if importFileOrNot == 'y': # 导入
         # 读取上次的结果
         GlobalVars = readJSON(GlobalVarsSavePath)
+        GlobalVars['RepoMatch'] = {}
         print("[info] 导入JSON文件成功")
 
     # 注册 Ctrl+C 退出处理程序
@@ -191,5 +192,5 @@ if __name__ == '__main__':
     print("[info] 开始同步仓库")
     from assets.transferRepos import transferRepos
     transferRepos(matchList.get('match'), WorkingDir, fromRepoProtocol = GiteeProtocol, toRepoProtocol = GitHubProtocol)
-    print("程序执行完毕，将退出")
+    print("程序结束，将退出")
     os.system("pause")
