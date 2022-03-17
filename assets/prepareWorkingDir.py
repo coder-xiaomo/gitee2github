@@ -21,6 +21,7 @@ def prepareWorkingDir(CurrentDir, WorkingDir):
         print("Windows系统")
         print('rd /s /q "{}"'.format(os.path.abspath(CurrentDir + "/.git")))
         print("\033[1;37;41m以上命令为强制删除命令，请再三确认无误后再进行操作！\033[0m")
+        input("程序已退出，按回车键继续...")
         exit()
 
     if os.path.exists(WorkingDir):
