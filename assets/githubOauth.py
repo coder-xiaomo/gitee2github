@@ -4,14 +4,14 @@ import time
 
 def githubOauth(GitHubClientID, GitHubClientSecret, githubProxies, timeout):
     print("################################ GitHub 授权 ################################")
-    input("按回车开始进行GitHub账号授权：")
+    input("按回车开始进行GitHub账号授权，注意如果账号Organization中的仓库也需要同步，那么您点击Authorize绿色按钮前需要点击Organization access部分对应组织的Grant按钮：")
 
     # ######################################## 获取GitHub用户的 access_token ########################################
     # Api文档：
     # https://docs.github.com/cn/developers/apps/building-oauth-apps/authorizing-oauth-apps
     # https://docs.github.com/cn/developers/apps/building-oauth-apps/scopes-for-oauth-apps
     # 认证地址
-    oauth_url = 'https://github.com/login/oauth/authorize?client_id={ClientID}&redirect_uri={redirect_uri}&response_type=code&scope=user,repo' \
+    oauth_url = 'https://github.com/login/oauth/authorize?client_id={ClientID}&redirect_uri={redirect_uri}&response_type=code&scope=user repo' \
         .format(ClientID=GitHubClientID, redirect_uri='https://www.only4.work/appHelper/github_show_code_param.php')
 
     # 打开浏览器让用户授权

@@ -11,6 +11,18 @@ def prepareWorkingDir(CurrentDir, WorkingDir):
     print("工作目录", WorkingDir)
     # print(os.getcwd()) # 获取当前脚本运行目录
 
+    if os.path.exists(os.path.abspath(CurrentDir + "/.git")):
+        print("\033[1;37;41m[error] 请不要在Git仓库中运行本程序，否则会导致Git仓库嵌套，当前仓库代码会覆盖您的仓库！\033[0m")
+        print("[error] 继续操作前请删除当前目录下的 .git 隐藏文件夹", os.path.abspath(CurrentDir + "/.git"))
+        print()
+        print("您可使用以下命令进行删除：")
+        print("Linux系统")
+        print('rm -rf "{}"'.format(os.path.abspath(CurrentDir + "/.git")))
+        print("Windows系统")
+        print('rd /s /q "{}"'.format(os.path.abspath(CurrentDir + "/.git")))
+        print("\033[1;37;41m以上命令为强制删除命令，请再三确认无误后再进行操作！\033[0m")
+        exit()
+
     if os.path.exists(WorkingDir):
         pass
         # # 工作目录已存在，如果非空就创建

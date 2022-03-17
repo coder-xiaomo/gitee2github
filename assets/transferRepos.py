@@ -19,7 +19,7 @@ def transferRepos(matchList, WorkingDir, fromRepoProtocol = 'https', toRepoProto
     for repo in matchList:
         # 查看当前目录
         # commands.append('echo 当前目录')
-        # commands.append('chdir')
+        commands.append('chdir')
         # 克隆仓库
         localRepoFolder = repo['from']['full_name'].split('/')[-1] + ".git"
         if not os.path.exists(WorkingDir + "/" + localRepoFolder):
@@ -32,6 +32,7 @@ def transferRepos(matchList, WorkingDir, fromRepoProtocol = 'https', toRepoProto
         # 切换到仓库目录
         # commands.append('echo 切换到仓库目录')
         commands.append("cd {folder_name}".format(folder_name = localRepoFolder))
+        commands.append('chdir')
         # 更新本地仓库
         # 不可以使用 git fetch --all  如果仓库中有hidden ref，则推送时会报错
         # commands.append('echo 更新本地仓库')
@@ -61,17 +62,20 @@ def transferRepos(matchList, WorkingDir, fromRepoProtocol = 'https', toRepoProto
     print("\033[1;37;41m继续前请务全量必备份仓库！\033[0m")
     print("\033[1;37;41m继续前请务全量必备份仓库！\033[0m")
     print("\033[1;37;41m继续前请务全量必备份仓库！\033[0m")
-    print("继续操作代表您已阅读上述内容，程序将在工作目录下生成一个批处理脚本")
-    if input("按<回车>键继续，或输入run直接执行(不推荐): ") == "run":
-        for commandForExecute in commands:
-            print("[正在执行]", commandForExecute)
-            os.system(commandForExecute)
-    else:
-        commandTxtPath = os.path.abspath(WorkingDir + "/commands.bat")
-        f=open(commandTxtPath, "w")
-        f.write('\n'.join(commands))
-        f.close()
-        print("命令文件生成完毕，请查看：", commandTxtPath)
+    input("继续操作代表您已阅读上述内容，按回车键继续...")
+
+    batFilePath = os.path.abspath(WorkingDir + "/commands.bat")
+    f=open(batFilePath, "w")
+    f.write('\n'.join(commands))
+    f.close()
+    print("命令文件生成完毕，请查看：", batFilePath)
+
+    if input("是否直接执行(不推荐)？输入y执行，其他输入不执行并继续: ") == "y":
+        os.system(batFilePath)
+        # 下面这样执行不行，无法保证当前目录
+        # for commandForExecute in commands:
+        #     print("[正在执行]", commandForExecute)
+        #     os.system(commandForExecute)
 
     # for command in commands:
     #     print(command)
