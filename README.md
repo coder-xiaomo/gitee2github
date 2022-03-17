@@ -327,8 +327,9 @@ gitee2github
  |  ├ commands.bat     # [-](运行时生成) 生成的bat命令
  |  ├ GlobalVars.json  # [-](运行时生成) 项目运行时记录，包含获取的仓库信息等
  ├ .gitignore          # [-] Git仓库文件
- ├ config.sample.json  # [-] 配置文件模板
- ├ config.json         # [-] 配置文件(必须设置)
+ ├ config.sample.ini   # [-] 配置文件模板
+ ├ config.ini          # [-] 配置文件(必须设置)
+ ├ LICENSE             # [-] 项目 MIT 许可证
  ├ main.py             # [-] 主程序
  ├ mapping.sample.json # [-] 仓库映射关系设置模板
  ├ mapping.json        # [-] 仓库映射关系设置(可选)
