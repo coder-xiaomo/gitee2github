@@ -1,21 +1,25 @@
 
-# Git仓库同步工具
+# Git 仓库同步工具
 
-*Gitee2gitHub*
+*Gitee2GitHub*
 
-本工具用于比较用户Gitee账号与GitHub账号中Git仓库，并进行同步（同名仓库镜像覆盖）。
+本工具用于比较用户 Gitee 账号与 GitHub 账号中Git仓库，并进行同步（同名仓库镜像覆盖）。
 
-> 注意：虽然本工具在开发过程中经过了很多的代码测试，但是由于测试环境较为复杂，没有办法做到覆盖每种情况，所以也许还会有Bug等等。本工具在Windows系统下开发，原理上来说Linux系统上或许也可以用，但是还未来得及测试。<span style="color: red;">建议有一定Git基础，能大致了解本工具原理的用户使用，如果您不了解本工具的同步原理，请一定不要盲目使用，因为一旦操作失误你可能会丢失仓库代码！</span>
+> 注意：虽然本工具在开发过程中经过了很多的代码测试，但是由于测试环境较为复杂，没有办法做到覆盖每种情况，所以也许还会有Bug等等。本工具在 Windows 系统下开发，原理上来说 Linux 系统上或许也可以用，但是还未来得及测试。<span style="color: red;">建议有一定Git基础，能大致了解本工具原理的用户使用，如果您不了解本工具的同步原理，请一定不要盲目使用，因为一旦操作失误你可能会丢失仓库代码！</span>
 
-## 目录
 
-[toc]
+
+## 项目介绍视频
+
+> 项目介绍与安装使用视频已上传至B站，欢迎前往观看：
+>
+> https://www.bilibili.com/video/BV1uU4y1Z7NW/
 
 
 
 ## 使用准备
 
-### 安装Git工具并配置
+### 安装 Git 工具并配置
 
 本地已安装Git工具，已配置Git全局设置。
 
@@ -29,15 +33,15 @@ git config --global user.email "youremail@example.com"
 
 
 
-### 安装Python及依赖库
+### 安装 Python 及依赖库
 
-脚本运行环境：Python 3.x（不支持Python 2.x） ，建议使用3.8以上版本的Python。
+脚本运行环境：Python 3.x（不支持Python 2.x） ，建议使用3.8以上版本的 Python。
 
 
 
 ### 下载本仓库代码
 
-**方式1**：克隆当前仓库并切换到master分支
+**方式1**：克隆当前仓库并切换到 master 分支
 
 > 特别注意！克隆后一定要删除本地仓库中的 .git 隐藏文件夹，否则后面将 Gitee 仓库克隆下来后再推送到 GitHub 会造成 Git 仓库嵌套，推送时当前脚本的仓库会覆盖目标 GitHub 仓库！
 >
@@ -57,9 +61,9 @@ cd ./gitee2github
 git checkout master
 
 # 重要！删除仓库中的 .git 文件夹(执行命令时记得去掉前面的 # 注释符)
-# Linux系统下
+# Linux 系统下
 # rm -rf ./.git
-# Windows系统下
+# Windows 系统下
 # rd /s /q .\.git
 ```
 
@@ -75,14 +79,14 @@ git checkout master
 
 > 项目使用了以下库👇
 >
-> - Python标准库（[官方文档](https://docs.python.org/zh-cn/3/library/index.html)）
+> - Python 标准库（[官方文档](https://docs.python.org/zh-cn/3/library/index.html)）
 >   - os - 执行系统命令
->   - signal - 捕获Ctrl+C退出信号
+>   - signal - 捕获 Ctrl + C 退出信号
 >   - webbrowser - 打开浏览器
 >   - time - 时间模块
 >   - shutil - 文件夹操作
->   - json - 读写JSON
->   - configparser - 读取ini配置文件
+>   - json - 读写 JSON
+>   - configparser - 读取 ini 配置文件
 >   - copy - 字典深拷贝
 > - 第三方库
 >   - requests - 发送请求
@@ -101,9 +105,9 @@ pip install -r .\requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple/
 
 
 
-### 创建Gitee第三方应用和GitHub OAuth App
+### 创建 Gitee 第三方应用和 GitHub OAuth App
 
-#### 创建Gitee第三方应用
+#### 创建 Gitee 第三方应用
 
 访问网址：https://gitee.com/oauth/applications ，点击右上角的 `创建应用` 按钮
 
@@ -123,7 +127,7 @@ pip install -r .\requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple/
 | logo             | 随便传一张图上去即可                                         |
 | **权限**         | 勾选 `projects` 权限                                         |
 
-创建成功后会得到 `Client ID` 和 `Client Secret`，将这两个信息复制保存下来，在下一步配置config.ini文件的时候需要。
+创建成功后会得到 `Client ID` 和 `Client Secret`，将这两个信息复制保存下来，在下一步配置 config.ini 文件的时候需要。
 
 ![](./image/gitee-oauth-applications-client-id-and-secret.png)
 
@@ -153,25 +157,25 @@ pip install -r .\requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple/
 
 ![](./image/gitee-oauth-applications-create-client-secret.png)
 
-此时可能需要输入GitHub密码
+此时可能需要输入 GitHub 密码
 
 ![](./image/github-confirm-access.png)
 
-得到 `Client ID` 和 `Client Secret`，将这两个信息复制保存下来，在下一步配置config.ini文件的时候需要。
+得到 `Client ID` 和 `Client Secret`，将这两个信息复制保存下来，在下一步配置 config.ini 文件的时候需要。
 
-> 注意 GitHub 的 `Client Secret` 只会在生成后显示一次，之后如果忘记则选哟重新生成一个，不像 Gitee 随时可以查看。
+> 注意 GitHub 的 `Client Secret` 只会在生成后显示一次，之后如果忘记则需要重新生成，不像 Gitee 随时可以查看。
 
 ![image-20220317142703739](./image/github-oauth-applications-client-id-and-secret.png)
 
-将这两个信息复制保存下来，在下一步配置config.ini文件的时候需要。
+将这两个信息复制保存下来，在下一步配置 config.ini 文件的时候需要。
 
 
 
-### 配置config.ini和mapping.json
+### 配置 config.ini 和 mapping.json
 
 #### 配置 config.ini
 
-> config.ini中主要配置Gitee和GitHub请求相关的信息。
+> config.ini 中主要配置 Gitee 和 GitHub 请求相关的信息。
 
 将仓库中的 `config.sample.ini` 复制一份，并修改文件名为 `config.ini`。
 
@@ -185,7 +189,7 @@ pip install -r .\requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple/
 ; 应用 ClientID 与 ClientSecret
 ClientID=YOUR_CLIENT_ID
 ClientSecret=YOUR_CLIENT_SECRET
-; 使用 ssh 还是 https 进行仓库 pull /push  可选项：https / ssh （填写其他值默认使用 https）
+; 使用 ssh 还是 https 进行仓库 pull / push  可选项：https / ssh （填写其他值默认使用 https）
 Protocol=https
 ; 代理 例如：127.0.0.1:15732 不使用代理请留空
 Proxy=
@@ -195,7 +199,7 @@ Proxy=
 ; 应用 ClientID 与 ClientSecret
 ClientID=YOUR_CLIENT_ID
 ClientSecret=YOUR_CLIENT_SECRET
-; 使用 ssh 还是 https 进行仓库 pull /push  可选项：https / ssh （填写其他值默认使用 https）
+; 使用 ssh 还是 https 进行仓库 pull / push  可选项：https / ssh （填写其他值默认使用 https）
 Protocol=https
 ; 代理 例如：127.0.0.1:15732 不使用代理请留空
 Proxy=
@@ -211,20 +215,18 @@ RequestTimeout=10
 | ---------------------- | ------------------------------------------------------------ |
 | [Gitee]                |                                                              |
 | ClientID、ClientSecret | 上面得到的 Gitee 的 `Client ID` 和 `Client Secret` 分别填入。 |
-| Protocol               | 指定克隆git仓库时使用https地址还是ssh地址。<br />ssh需要先行现在本地配置好后才可以克隆<br />对于私有仓库，https克隆每个仓库都需要输入账号密码 |
-| Proxy                  | 配置代理服务器。国内Gitee访问不需要使用代理，所以留空即可    |
+| Protocol               | 指定克隆 git 仓库时使用 https 地址还是 ssh 地址。<br />ssh 需要先行现在本地配置好后才可以克隆<br />对于私有仓库，https 克隆每个仓库都需要输入账号密码 |
+| Proxy                  | 配置代理服务器。国内 Gitee 访问不需要使用代理，所以留空即可  |
 | [GitHub]               |                                                              |
 | ClientID、ClientSecret | 上面得到的 GitHub 的 `Client ID` 和 `Client Secret` 分别填入。 |
-| Protocol               | 指定克隆git仓库时使用https地址还是ssh地址。<br />ssh需要先行现在本地配置好后才可以克隆<br />对于私有仓库，https克隆每个仓库都需要输入账号密码 |
-| Proxy                  | 配置代理服务器。GitHub访问时很有可能出现访问缓慢，时不时无法访问的情况。如果您有VPN代理服务器，可以将代理服务器地址填写到此处。<br />如果您不知道代理服务器的意思，那么此处留空即可，只是后面进行到GitHub授权的位置会有一定概率失败，多重试几次即可。 |
+| Protocol               | 指定克隆git仓库时使用 https 地址还是 ssh 地址。<br />ssh 需要先行现在本地配置好后才可以克隆<br />对于私有仓库，https 克隆每个仓库都需要输入账号密码 |
+| Proxy                  | 配置代理服务器。GitHub 访问时很有可能出现访问缓慢，时不时无法访问的情况。如果您有 VPN 代理服务器，可以将代理服务器地址填写到此处。<br />如果您不知道代理服务器的意思，那么此处留空即可，只是后面进行到 GitHub 授权的位置会有一定概率失败，多重试几次即可。 |
 | [Common]               |                                                              |
 | RequestTimeout         | 请求超时时间，单位为秒，默认值为 10 秒                       |
 
 
 
-#### 配置mapping.json（可选）
-
-
+#### 配置 mapping.json（可选）
 
 ##### 配置
 
@@ -235,15 +237,18 @@ RequestTimeout=10
 {
     "orgNameMap": {
         "from1": "to1",
-        "from2": "to2"
+        "from2": "to2",
+        ...
     },
     "repoNameMap": {
         "from1": "to1",
-        "from2": "to2"
+        "from2": "to2",
+        ...
     },
     "fullNameMap": {
         "from1": "to1",
-        "from2": "to2"
+        "from2": "to2",
+        ...
     }
 }
 ````
@@ -258,7 +263,7 @@ RequestTimeout=10
 >
 > 1. 在此处设置映射后将使用映射后的值进行比较，映射前的值将不再参与比较
 >
-> 2. 只配置需要映射的字段，例如您不需要 fullNameMap 映射关系，那么 JSON 中就不配置这个字段。如果这三个字段都不需要，那么请不要创建 mapping.json 文件（空mapping.json文件执行时会报错）
+> 2. 只配置需要映射的字段，例如您不需要 fullNameMap 映射关系，那么 JSON 中就不配置这个字段。如果这三个字段都不需要，那么请不要创建 mapping.json 文件（空 mapping.json 文件执行时会报错）
 
 
 
@@ -266,37 +271,37 @@ RequestTimeout=10
 
 ###### 什么是映射？
 
-映射就是在您的Gitee和GitHub个人地址、或仓库地址地址不同，但是这两个仓库需要同步仓库时使用。
+映射就是在您的 Gitee 和 GitHub 个人地址、或仓库地址地址不同，但是这两个仓库需要同步仓库时使用。
 
-> 例如：您的 Gitee 用户地址为 `https://gitee.com/username1`，而 GitHub 用户地址为 `https://github.com/username2`，那么就可以配置 “orgNameMap”，使得 `username1` 映射为 `username2` 。
+> 例如：您的 Gitee 用户地址为 `https://gitee.com/username1`，而 GitHub 用户地址为 `https://github.com/username2`，那么就可以配置 `orgNameMap`，使得 `username1` 映射为 `username2` 。
 >
-> （设置之后 Gitee下的 `username1` 将不再与 GitHub 下的 `username1` 匹配，而是与与 GitHub 下的 `username2` 匹配）
+> （设置之后 Gitee 下的 `username1` 将不再与 GitHub 下的 `username1` 匹配，而是与与 GitHub 下的 `username2` 匹配）
 
 
 
 ###### 映射有哪几种？
 
-本项目分了三个维度的映射，分别是 orgNameMap，repoNameMap和fullNameMap。
+本项目分了三个维度的映射，分别是 `orgNameMap `、`repoNameMap` 和 `fullNameMap`。
 
-orgNameMap是用户地址的映射，repoNameMap是全映射（综合前两种）
+orgNameMap 是用户地址的映射，repoNameMap 是全映射（综合前两种）
 
-| 举例               | 配置fullNameMap                          | 配置orgNameMap           | 配置repoNameMap          |
-| ------------------ | ---------------------------------------- | ------------------------ | ------------------------ |
-|                    | "orgname/reponame": "org-name/repo-name" | "orgname": "org-name"    | "reponame": "repo-name"  |
-| orgname/reponame   | 映射为org-name/repo-name                 | 映射为org-name/reponame  | 映射为orgname/repo-name  |
-| org-name/reponame  | 不变                                     | 不变                     | 映射为org-name/repo-name |
-| orgname/repo-name  | 不变                                     | 映射为org-name/repo-name | 不变                     |
-| org-name/repo-name | 不变                                     | 不变                     | 不变                     |
+| 举例               | 配置fullNameMap                            | 配置orgNameMap               | 配置repoNameMap             |
+| ------------------ | ------------------------------------------ | ---------------------------- | --------------------------- |
+| **配置的映射规则** | `"orgname/reponame": "org-name/repo-name"` | `"orgname": "org-name"`      | `"reponame": "repo-name"`   |
+| orgname/reponame   | 映射为 `org-name/repo-name`                | 映射为 `org-name/reponame`   | 映射为 `orgname/repo-name`  |
+| org-name/reponame  | 不变                                       | 不变                         | 映射为 `org-name/repo-name` |
+| orgname/repo-name  | 不变                                       | 映~射为 `org-name/repo-name` | 不变                        |
+| org-name/repo-name | 不变                                       | 不变                         | 不变                        |
 
 
 
 ###### 具体是怎么匹配的？匹配步骤是什么？
 
-现在有gitee的一个仓库 org1/repo1 ，GitHub的一个仓库 org2/repo2
+现在有 Gitee 的一个仓库 `org1/repo1` ，GitHub 的一个仓库 `org2/repo2`
 
-1. 检测 org1/repo1 是否在 fullNameMap 映射中，如果在，那么将其映射为 org1'/repo1'，再将 org1'/repo1' 与 org2/repo2 匹配；
-2. 若不在 fullNameMap 映射中，那么进行 orgNameMap 和 repoNameMap 匹配。 org1/repo1 会先被映射为 org1''/repo1，紧接着被映射为 org1''/repo1''，再将 org1''/repo1'' 与 org2/repo2 匹配；
-3. 若 org1/repo1 不在上述映射范围内，那么直接将 org1/repo1 与 org2/repo2 匹配。
+1. 检测 `org1/repo1` 是否在 `fullNameMap` 映射中，如果在，那么将其映射为 `org1'/repo1'`，再将 `org1'/repo1'` 与 `org2/repo2` 匹配；
+2. 若不在 `fullNameMap` 映射中，那么进行 `orgNameMap` 和 `repoNameMap` 匹配。 `org1/repo1` 会先被映射为 `org1''/repo1`，紧接着被映射为 `org1''/repo1''`，再将 `org1''/repo1''` 与 `org2/repo2` 匹配；
+3. 若 `org1/repo1` 不在上述映射范围内，那么直接将 `org1/repo1` 与 `org2/repo2` 匹配。
 
 
 
@@ -308,7 +313,7 @@ orgNameMap是用户地址的映射，repoNameMap是全映射（综合前两种�
 
 项目代码中很多地方都标注有详细的注释，感兴趣的小伙伴儿可以研究研究，也欢迎和我交流。
 
-> 注意：由于GitHub和Gitee限制，最多读取100个仓库信息。如需同步更多仓库，请修改 `assets/giteeOauth.py` 和 `assets/githubOauth.py` 脚本中的逻辑进行分批获取。也欢迎给本仓库提PR。
+> 注意：由于 GitHub 和 Gitee 的分页规则，每次请求最多读取 100 个仓库信息。如需同步更多仓库，需要分页获取。分页获取功能本项目暂时还没有实现。如果您有 Python 脚本编写经验，欢迎给本仓库提Pr。需要修改的地方有： `assets/giteeOauth.py` 和 `assets/githubOauth.py` 脚本中的分页分批获取。
 
 
 
@@ -338,6 +343,3 @@ gitee2github
 ```
 
 \* `d` 代表文件夹，`-` 代表文件
-
-
-
